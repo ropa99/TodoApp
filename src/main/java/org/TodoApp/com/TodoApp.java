@@ -4,7 +4,7 @@ package org.TodoApp.com;
  * Hello world!
  *
  */
-public class App 
+public class TodoApp
 {
     public static void main( String[] args )
     {
