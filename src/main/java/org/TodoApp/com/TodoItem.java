@@ -51,7 +51,7 @@ public class TodoItem {
         this.title = title;
     }
     public void setDeadLine(LocalDate deadLine) {
-        if(deadLine == null ) throw new IllegalArgumentException("Deadline can not be null");
+        if(deadLine == null ) throw new IllegalArgumentException("Deadline cannot be null");
         if(isOverDue(deadLine)) throw new IllegalArgumentException("Deadline is overdue");
         this.deadLine = deadLine;
     }
