@@ -16,5 +16,7 @@ public class TodoApp
         System.out.println(tdit);
         AppUser appu = new AppUser("Donald Duck","password", org.TodoApp.com.AppRole.ROLE_APP_ADMIN);
         System.out.println(appu);
+        Person pCredentials = new org.TodoApp.com.Person("Bamse","skalman","hoj@hej.com",new org.TodoApp.com.AppUser("Bamse-liten","secretpwd", org.TodoApp.com.AppRole.ROLE_APP_USER));
+        System.out.println(pCredentials);
     }
 }

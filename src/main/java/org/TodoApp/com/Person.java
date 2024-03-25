@@ -14,7 +14,12 @@ public class Person {
         this.id = setId();
     }
 
-/******************/
+    public Person(String firstName, String lastName, String email, org.TodoApp.com.AppUser credentials) {
+        this(firstName,lastName,email);
+        setCredentials(credentials);
+    }
+
+    /******************/
     public int getId(){
         return this.id;
     }
@@ -31,18 +36,17 @@ public class Person {
     }
 
 
-    public void setFirstName(String firstName){
-        if(firstName == null || firstName.trim().isEmpty()) throw new IllegalArgumentException("First name cannot be null or empty");
-        this.firstName = firstName;
-
-    }
-
     public AppUser getCredentials() {
         return credentials;
     }
 
     /***************/
 
+    public void setFirstName(String firstName){
+        if(firstName == null || firstName.trim().isEmpty()) throw new IllegalArgumentException("First name cannot be null or empty");
+        this.firstName = firstName;
+
+    }
     public  void setLastName(String lastName){
         if(lastName == null || lastName.trim().isEmpty()) throw new IllegalArgumentException("Last name cannot be null or empty");
         this.lastName = lastName;
@@ -53,6 +57,7 @@ public class Person {
 
     }
     public void setCredentials(AppUser credentials) {
+        if(credentials == null) throw new IllegalArgumentException("Credentials cannot be null");
         this.credentials = credentials;
     }
 

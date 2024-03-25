@@ -6,9 +6,9 @@ public class AppUser {
     private AppRole role;
 
     public AppUser(String username, String password, org.TodoApp.com.AppRole role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
+       setUsername(username);
+        setPassword(password);
+        setRole(role);
     }
 
 
@@ -35,6 +35,7 @@ public class AppUser {
      public void setUsername(String username) {
          if (username == null || username.trim().isEmpty())
              throw new IllegalArgumentException("User name cannot be null or empty");
+         this.username = username;
      }
      public void setRole(AppRole role){
         if(role == null) throw new IllegalArgumentException("Role cannot be null");
@@ -58,7 +59,7 @@ public class AppUser {
 
     @Override
     public String toString(){
-          return "User name: " + getUsername() + " Role: " +getRole().toString() ;
+          return  "User name: " + getUsername() + " Role: " +getRole().toString() ;
     }
 
     @Override
