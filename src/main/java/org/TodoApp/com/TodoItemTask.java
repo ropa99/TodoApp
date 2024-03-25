@@ -31,12 +31,8 @@ public class TodoItemTask {
 
 
 
-    public String getSummary(){
-        String strSummary = "id: " + getId() + "," + "assigned: " + isAssigned()  + ", " + "todoItem: " + getTodoItem().getTaskDescription() + ", " + " assignee: " + getAssignee().getFirstName() + getAssignee().getLastName();
 
-        return strSummary;
-    }
-
+/************/
     public void setTodoItem(org.TodoApp.com.TodoItem todoItem) {
         if(todoItem == null) throw new IllegalArgumentException("TodoItem can not be null");
         this.todoItem = todoItem;
@@ -53,8 +49,25 @@ public class TodoItemTask {
         return assigned;
     }
 
-
     private int setId() {
         return ID.getIdNumber();
+    }
+
+    @Override
+    public String toString(){
+        return "id: " + getId() + "," + "assigned: " + isAssigned()  + ", " + "todoItem: " + getTodoItem().getTaskDescription() + ", " + " assignee: " + getAssignee().getFirstName() + getAssignee().getLastName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof org.TodoApp.com.TodoItemTask)) return false;
+        org.TodoApp.com.TodoItemTask that = (org.TodoApp.com.TodoItemTask) o;
+        return id == that.id && assigned == that.assigned && java.util.Objects.equals(todoItem, that.todoItem) && java.util.Objects.equals(assignee, that.assignee);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, assigned, todoItem, assignee);
     }
 }
