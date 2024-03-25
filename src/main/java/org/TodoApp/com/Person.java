@@ -72,7 +72,7 @@ public class Person {
         if (this == o) return true;
         if (!(o instanceof org.TodoApp.com.Person)) return false;
         org.TodoApp.com.Person person = (org.TodoApp.com.Person) o;
-        return id == person.id && java.util.Objects.equals(firstName, person.firstName) && java.util.Objects.equals(lastName, person.lastName) && java.util.Objects.equals(email, person.email) && java.util.Objects.equals(credentials, person.credentials);
+        return id == person.id && java.util.Objects.equals(firstName, person.firstName) && java.util.Objects.equals(lastName, person.lastName) && java.util.Objects.equals(email, person.email) ;
     }
 
     @Override

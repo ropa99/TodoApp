@@ -40,11 +40,8 @@ public class TodoItem {
         return creator;
     }
 
-    public String getSummary(){
-        String strSummary = "id: " + getId() + "," + "title: " + getTitle() + ", " + "description: " + getTaskDescription() + ", " + "deadline " + getDeadLine() + ", " + "status: " + isDone() + ", " + "creator: " + getCreator().getFirstName() + " " + getCreator().getLastName();
 
-        return strSummary;
-    }
+    /********************/
     public void setTitle(String title) {
 
         if(title == null || title.trim().isEmpty()) throw new IllegalArgumentException("Title cannot be null or empty");
@@ -84,4 +81,21 @@ public class TodoItem {
         return ID.getIdNumber();
     }
 
+    @Override
+    public String toString(){
+        return "id: " + getId() + "," + "title: " + getTitle() + ", " + "description: " + getTaskDescription() + ", " + "deadline " + getDeadLine() + ", " + "status: " + isDone() + ", " + "creator: " + getCreator().getFirstName() + " " + getCreator().getLastName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof org.TodoApp.com.TodoItem)) return false;
+        org.TodoApp.com.TodoItem todoItem = (org.TodoApp.com.TodoItem) o;
+        return id == todoItem.id && done == todoItem.done && java.util.Objects.equals(title, todoItem.title) && java.util.Objects.equals(taskDescription, todoItem.taskDescription) && java.util.Objects.equals(deadLine, todoItem.deadLine) && java.util.Objects.equals(creator, todoItem.creator);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, title, taskDescription, deadLine, done, creator);
+    }
 }

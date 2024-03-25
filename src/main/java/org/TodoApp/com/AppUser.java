@@ -5,6 +5,12 @@ public class AppUser {
     private String password;
     private AppRole role;
 
+    public AppUser(String username, String password, org.TodoApp.com.AppRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
 
     public String getUsername(){
         return username;
@@ -36,15 +42,7 @@ public class AppUser {
 
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 
     /******************/
   /*  @Override
@@ -61,5 +59,18 @@ public class AppUser {
     @Override
     public String toString(){
           return "User name: " + getUsername() + " Role: " +getRole().toString() ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof org.TodoApp.com.AppUser)) return false;
+        org.TodoApp.com.AppUser appUser = (org.TodoApp.com.AppUser) o;
+        return java.util.Objects.equals(username, appUser.username) &&  role == appUser.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(username, role);
     }
 }
