@@ -63,7 +63,7 @@ public class Person {
 
     private int setId() {
 
-        return ID.getIdNumber();
+        return ID.getInstance().getIdNumber();
 
     }
     /*************/

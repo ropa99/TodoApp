@@ -78,7 +78,8 @@ public class TodoItem {
 
     }
     private int setId() {
-        return ID.getIdNumber();
+
+        return ID.getInstance().getIdNumber();
     }
 
     @Override
