@@ -3,10 +3,10 @@ import org.TodoApp.com.TodoItemTask;
 import java.util.Collection;
 
 public interface TodoItemTaskDAO {
-    TodoltemTask persist(todoltemTask tTask);
-    TodoltemTask findByld(int id);
-    Collection<TodoltemTask> findAll();
-    Collection<TodoltemTask> findByAssignedStatus(boolean status);
-    Collection<TodoltemTask> findByPersonid(int personld);
+    TodoItemTask persist(TodoItemTask tTask);
+    TodoItemTask findByld(int id);
+    Collection<TodoItemTask> findAll();
+    Collection<TodoItemTask> findByAssignedStatus(boolean status);
+    Collection<TodoItemTask> findByPersonid(int personld);
     void remove(int id);
 }

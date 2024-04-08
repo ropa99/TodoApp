@@ -1,4 +1,4 @@
-package org.TodoApp.com;
+package org.TodoApp.com.sequencers;
 
 public class ID {
     private static int theNumber;
