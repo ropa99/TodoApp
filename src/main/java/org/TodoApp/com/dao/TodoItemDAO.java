@@ -1,5 +1,5 @@
 package org.TodoApp.com.dao;
-import org.TodoApp.com.TodoItem;
+import org.TodoApp.com.model.TodoItem;
 import java.util.Collection;
 import java.time.LocalDate;
 

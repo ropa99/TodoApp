@@ -1,11 +1,11 @@
-package org.TodoApp.com;
+package org.TodoApp.com.model;
 
 public class AppUser {
     private String username;
     private String password;
     private AppRole role;
 
-    public AppUser(String username, String password, org.TodoApp.com.AppRole role) {
+    public AppUser(String username, String password, org.TodoApp.com.model.AppRole role) {
        setUsername(username);
         setPassword(password);
         setRole(role);
@@ -65,8 +65,8 @@ public class AppUser {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof org.TodoApp.com.AppUser)) return false;
-        org.TodoApp.com.AppUser appUser = (org.TodoApp.com.AppUser) o;
+        if (!(o instanceof org.TodoApp.com.model.AppUser)) return false;
+        org.TodoApp.com.model.AppUser appUser = (org.TodoApp.com.model.AppUser) o;
         return java.util.Objects.equals(username, appUser.username) &&  role == appUser.role;
     }
 

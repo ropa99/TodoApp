@@ -1,4 +1,4 @@
-package org.TodoApp.com;
+package org.TodoApp.com.model;
 
 public enum AppRole {
 

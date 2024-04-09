@@ -1,6 +1,6 @@
 package org.TodoApp.com.daoimpl;
 import org.TodoApp.com.dao.TodoItemDAO;
-import org.TodoApp.com.TodoItem;
+import org.TodoApp.com.model.TodoItem;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,26 +9,28 @@ import java.time.LocalDate;
 
 public class TodoltemDAOCollection implements TodoItemDAO{
 
-    private  final List<TodoItem> todoItemList;
+    private  final List<TodoItem> todoItemList = new ArrayList<>();
+
+    public TodoltemDAOCollection(){ }
 
     public TodoltemDAOCollection(TodoItem todoItem) {
-        todoItemList = new java.util.ArrayList<>();
-        todoItemList.add(todoItem);
+        this.persist(todoItem);
     }
 
     @Override
     public TodoItem persist(TodoItem tItem) {
-        todoItemList.add(tItem);
+        if(!todoItemList.add(tItem)){
+            tItem = null;
+        }
         return tItem;
     }
 
     @Override
     public TodoItem findById(int id) {
         TodoItem todoItem = null;
-        Iterator<TodoItem> it = todoItemList.iterator();
-        while(it.hasNext()){
-            if (it.next().getId() == id) {
-                todoItem = it.next();
+        for(TodoItem todo : todoItemList){
+            if(todo.getId() == id){
+                todoItem = todo;
             }
         }
         return todoItem;
@@ -42,11 +44,10 @@ public class TodoltemDAOCollection implements TodoItemDAO{
     @Override
     public Collection<TodoItem> findAllByDoneStatus(boolean done) {
         List<TodoItem> tmpList = new ArrayList<>();
-        Iterator<TodoItem> it = todoItemList.iterator();
-        while(it.hasNext()){
-            if (done == it.next().isDone()) {
-                tmpList.add(it.next());
-            }
+
+        for(TodoItem to: todoItemList){
+            if(to.isDone() == done)
+                tmpList.add(to);
         }
 
         return tmpList;
@@ -71,11 +72,9 @@ public class TodoltemDAOCollection implements TodoItemDAO{
     public Collection<TodoItem> findByPersonld(int personld) {
 
         List<TodoItem> tmpList = new ArrayList<>();
-        Iterator<TodoItem> it = todoItemList.iterator();
-
-        while(it.hasNext()){
-            if (it.next().getId() == personld) {
-                tmpList.add(it.next());
+        for(TodoItem todo : todoItemList){
+            if(todo.getId() == id){
+                tmpList.add(todo);
             }
         }
         return tmpList;

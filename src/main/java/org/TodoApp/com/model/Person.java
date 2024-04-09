@@ -1,4 +1,6 @@
-package org.TodoApp.com;
+package org.TodoApp.com.model;
+
+import org.TodoApp.com.sequencers.ID;
 
 public class Person {
     private int id;
@@ -14,7 +16,7 @@ public class Person {
         this.id = setId();
     }
 
-    public Person(String firstName, String lastName, String email, org.TodoApp.com.AppUser credentials) {
+    public Person(String firstName, String lastName, String email, org.TodoApp.com.model.AppUser credentials) {
         this(firstName,lastName,email);
         setCredentials(credentials);
     }
@@ -75,8 +77,8 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof org.TodoApp.com.Person)) return false;
-        org.TodoApp.com.Person person = (org.TodoApp.com.Person) o;
+        if (!(o instanceof org.TodoApp.com.model.Person)) return false;
+        org.TodoApp.com.model.Person person = (org.TodoApp.com.model.Person) o;
         return id == person.id && java.util.Objects.equals(firstName, person.firstName) && java.util.Objects.equals(lastName, person.lastName) && java.util.Objects.equals(email, person.email) ;
     }
 

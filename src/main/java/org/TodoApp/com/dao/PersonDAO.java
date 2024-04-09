@@ -1,5 +1,5 @@
 package org.TodoApp.com.dao;
-import org.TodoApp.com.Person;
+import org.TodoApp.com.model.Person;
 import java.util.Collection;
 
 public interface PersonDAO {

@@ -1,22 +1,28 @@
 package org.TodoApp.com.daoimpl;
 import org.TodoApp.com.dao.PersonDAO;
-import org.TodoApp.com.Person;
+import org.TodoApp.com.model.Person;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Collection;
 public class PersonDAOCollection implements PersonDAO {
 
-    private  final List<Person> personList;
+    private  final List<Person> personList = new ArrayList<>();
+
+    public PersonDAOCollection(){
+
+    }
 
     public PersonDAOCollection(Person person) {
-        personList = new ArrayList<>();
-        personList.add(person);
+
+        this.persist(person);
     }
 
     @Override
     public Person persist(Person pUser) {
-        personList.add(pUser);
+        if(!personList.add(pUser)){
+            pUser = null;
+        }
         return pUser;
     }
 
@@ -24,11 +30,11 @@ public class PersonDAOCollection implements PersonDAO {
     public Person findById(int id) {
 
         Person pId = null;
-        Iterator<Person> it = personList.iterator();
-        while(it.hasNext()){
-            if (it.next().getId() == id) {
-                pId = it.next();
+        for(Person pers: personList){
+            if (pers.getId() == id) {
+                pId = pers;
             }
+
         }
 
         return pId;
@@ -39,12 +45,11 @@ public class PersonDAOCollection implements PersonDAO {
     public Person findByEmail(String email) {
         if(email == null || email.trim().isEmpty()) throw new IllegalArgumentException("Email Can not be null or empty");
         Person pEmail = null;
-
-        Iterator<Person> it = personList.iterator();
-        while(it.hasNext()){
-            if (it.next().getEmail().equalsIgnoreCase(email)) {
-                pEmail = it.next();
+        for(Person pers: personList){
+            if (pers.getEmail().equalsIgnoreCase(email)) {
+                pEmail = pers;
             }
+
         }
 
         return pEmail;

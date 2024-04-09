@@ -1,5 +1,5 @@
 package org.TodoApp.com.dao;
-import org.TodoApp.com.TodoItemTask;
+import org.TodoApp.com.model.TodoItemTask;
 import java.util.Collection;
 
 public interface TodoItemTaskDAO {

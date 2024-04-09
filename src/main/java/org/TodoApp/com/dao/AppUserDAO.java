@@ -1,5 +1,5 @@
 package org.TodoApp.com.dao;
-import org.TodoApp.com.AppUser;
+import org.TodoApp.com.model.AppUser;
 import java.util.Collection;
 public interface AppUserDAO {
     AppUser persist(AppUser aUser);

@@ -1,17 +1,17 @@
 package org.TodoApp.com.daoimpl;
 import org.TodoApp.com.dao.TodoItemTaskDAO;
-import org.TodoApp.com.TodoItemTask;
+import org.TodoApp.com.model.TodoItemTask;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Collection;
 
 
-public class TodoltemDaskDAOCollection implements TodoItemTaskDAO{
+public class TodoltemTaskDAOCollection implements TodoItemTaskDAO{
 
     private  final List<TodoItemTask> todoItemTaskList;
 
-    public TodoltemDaskDAOCollection(TodoItemTask task) {
+    public TodoltemTaskDAOCollection(TodoItemTask task) {
         todoItemTaskList = new java.util.ArrayList<>();
         todoItemTaskList.add(task);
     }
@@ -52,7 +52,7 @@ public class TodoltemDaskDAOCollection implements TodoItemTaskDAO{
     }
 
     @Override
-    public Collection<org.TodoApp.com.TodoItemTask> findByPersonid(int personld) {
+    public Collection<org.TodoApp.com.model.TodoItemTask> findByPersonid(int personld) {
         List<TodoItemTask> tmpList = new ArrayList<>();
         Iterator<TodoItemTask> it = todoItemTaskList.iterator();
         while(it.hasNext()){
