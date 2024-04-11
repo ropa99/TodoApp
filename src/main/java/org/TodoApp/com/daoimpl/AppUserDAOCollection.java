@@ -19,9 +19,9 @@ public class AppUserDAOCollection implements AppUserDAO {
 
     @Override
     public AppUser persist(AppUser aUser) {
-        if(!appUserList.add(aUser)){
-            aUser = null;
-        }
+        if(aUser == null) { throw new IllegalArgumentException("User can not be null"); }
+
+        if (!appUserList.add(aUser)) { throw new IllegalArgumentException("Could not store user"); }
         return aUser;
     }
 
@@ -43,7 +43,8 @@ public class AppUserDAOCollection implements AppUserDAO {
 
     @Override
     public Collection<AppUser> findAll() {
-        return appUserList;
+        //return appUserList;
+        return new java.util.ArrayList<>(appUserList);
     }
 
     @Override

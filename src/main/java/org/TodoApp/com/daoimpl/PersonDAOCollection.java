@@ -57,7 +57,8 @@ public class PersonDAOCollection implements PersonDAO {
 
     @Override
     public Collection<Person> findAll() {
-        return personList;
+        //return personList;
+        return new java.util.ArrayList<>(personList);
     }
 
     @Override

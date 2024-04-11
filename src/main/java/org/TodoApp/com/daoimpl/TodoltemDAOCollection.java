@@ -38,7 +38,8 @@ public class TodoltemDAOCollection implements TodoItemDAO{
 
     @Override
     public Collection<TodoItem> findAll() {
-        return todoItemList;
+       // return todoItemList;
+        return new java.util.ArrayList<>(todoItemList);
     }
 
     @Override
@@ -57,13 +58,11 @@ public class TodoltemDAOCollection implements TodoItemDAO{
     public Collection<TodoItem> findByTitleContains(String title) {
         if(title == null || title.trim().isEmpty()) throw new IllegalArgumentException("Title can not be null or empty");
         List<TodoItem> tmpList = new ArrayList<>();
-        Iterator<TodoItem> it = todoItemList.iterator();
-        while(it.hasNext()){
-            if (it.next().getTitle().equalsIgnoreCase(title)) {
-                tmpList.add(it.next());
+        for(TodoItem tot : todoItemList){
+            if (tot.getTitle().equalsIgnoreCase(title)) {
+                tmpList.add(tot);
             }
         }
-
         return tmpList;
 
     }
@@ -73,7 +72,7 @@ public class TodoltemDAOCollection implements TodoItemDAO{
 
         List<TodoItem> tmpList = new ArrayList<>();
         for(TodoItem todo : todoItemList){
-            if(todo.getId() == id){
+            if(todo.getId() == personld){
                 tmpList.add(todo);
             }
         }
@@ -84,10 +83,9 @@ public class TodoltemDAOCollection implements TodoItemDAO{
     public Collection<TodoItem> findByDeadlineBefore(LocalDate date) {
         if(date == null) throw new IllegalArgumentException("Date can not be null or empty");
         List<TodoItem> tmpList = new ArrayList<>();
-        Iterator<TodoItem> it = todoItemList.iterator();
-        while(it.hasNext()){
-            if (it.next().getDeadLine().isBefore(date)) {
-                tmpList.add(it.next());
+        for(TodoItem todo : todoItemList) {
+            if (todo.getDeadLine().isBefore(date)) {
+                tmpList.add(todo);
             }
         }
         return tmpList;
@@ -97,10 +95,9 @@ public class TodoltemDAOCollection implements TodoItemDAO{
     public Collection<TodoItem> findByDeadlineAfter(LocalDate date) {
         if(date == null) throw new IllegalArgumentException("Date can not be null or empty");
         List<TodoItem> tmpList = new ArrayList<>();
-        Iterator<TodoItem> it = todoItemList.iterator();
-        while(it.hasNext()){
-            if (it.next().getDeadLine().isAfter(date)) {
-                tmpList.add(it.next());
+        for(TodoItem todo : todoItemList) {
+            if (todo.getDeadLine().isAfter(date)) {
+                tmpList.add(todo);
             }
         }
         return tmpList;

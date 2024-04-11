@@ -9,15 +9,18 @@ import java.util.Collection;
 
 public class TodoltemTaskDAOCollection implements TodoItemTaskDAO{
 
-    private  final List<TodoItemTask> todoItemTaskList;
+    private  final List<TodoItemTask> todoItemTaskList   = new java.util.ArrayList<>();
+
+    public TodoltemTaskDAOCollection() {}
 
     public TodoltemTaskDAOCollection(TodoItemTask task) {
-        todoItemTaskList = new java.util.ArrayList<>();
-        todoItemTaskList.add(task);
+
+        this.persist(task);
     }
 
     @Override
     public TodoItemTask persist(TodoItemTask tTask) {
+        if(tTask == null) { throw new IllegalArgumentException("To do Item task can not be null"); }
         todoItemTaskList.add(tTask);
         return tTask;
     }
@@ -25,23 +28,27 @@ public class TodoltemTaskDAOCollection implements TodoItemTaskDAO{
     @Override
     public TodoItemTask findByld(int id) {
         TodoItemTask todoItemTask = null;
-        Iterator<TodoItemTask> it = todoItemTaskList.iterator();
-        while(it.hasNext()){
-            if (it.next().getId() == id) {
-                todoItemTask = it.next();
+        TodoItemTask task = null;
+        for(TodoItemTask todo : todoItemTaskList){
+            if(todo.getId() == id){
+                todoItemTask = todo;
             }
         }
         return todoItemTask;
+
+
     }
 
     @Override
     public Collection<TodoItemTask> findAll() {
-        return todoItemTaskList;
+        return new java.util.ArrayList<>(todoItemTaskList);
     }
 
     @Override
     public Collection<TodoItemTask> findByAssignedStatus(boolean status) {
         List<TodoItemTask> tmpList = new ArrayList<>();
+
+
         Iterator<TodoItemTask> it = todoItemTaskList.iterator();
         while(it.hasNext()){
             if (status == it.next().isAssigned()) {
@@ -54,11 +61,10 @@ public class TodoltemTaskDAOCollection implements TodoItemTaskDAO{
     @Override
     public Collection<org.TodoApp.com.model.TodoItemTask> findByPersonid(int personld) {
         List<TodoItemTask> tmpList = new ArrayList<>();
-        Iterator<TodoItemTask> it = todoItemTaskList.iterator();
-        while(it.hasNext()){
-            if (it.next().getId() == personld) {
-                tmpList.add(it.next());
-            }
+       for(TodoItemTask task : todoItemTaskList){
+           if(task.getId() == personld){
+               tmpList.add(task);
+           }
         }
         return tmpList;
     }
