@@ -1,15 +1,20 @@
-package org.TodoApp.com;
+package org.TodoApp.com.model;
+
+import org.TodoApp.com.sequencers.ID;
+import org.TodoApp.com.model.TodoItem;
+import org.TodoApp.com.model.Person;
+import org.TodoApp.com.model.TodoItemTask;
 
 public class TodoItemTask {
     private int id;
     private boolean assigned;
     private TodoItem todoItem;
 
-    private Person assignee;
+    private org.TodoApp.com.model.Person assignee;
 
 
 
-    public TodoItemTask(org.TodoApp.com.TodoItem todoItem, org.TodoApp.com.Person assignee) {
+    public TodoItemTask(TodoItem todoItem, Person assignee) {
         setTodoItem(todoItem);
         setAssignee(assignee);
         setAssigned(false);
@@ -19,13 +24,13 @@ public class TodoItemTask {
         return id;
     }
 
-    public org.TodoApp.com.TodoItem getTodoItem() {
+    public TodoItem getTodoItem() {
         return todoItem;
     }
 
 
 
-    public org.TodoApp.com.Person getAssignee() {
+    public Person getAssignee() {
         return assignee;
     }
 
@@ -33,7 +38,7 @@ public class TodoItemTask {
 
 
 /************/
-    public void setTodoItem(org.TodoApp.com.TodoItem todoItem) {
+    public void setTodoItem(TodoItem todoItem) {
         if(todoItem == null) throw new IllegalArgumentException("TodoItem can not be null");
         this.todoItem = todoItem;
     }
@@ -42,7 +47,7 @@ public class TodoItemTask {
         //if(assigned == null) throw new IllegalArgumentException("Assigned can not be null");
         this.assigned = assigned;
     }
-    public void setAssignee(org.TodoApp.com.Person assignee) {
+    public void setAssignee(org.TodoApp.com.model.Person assignee) {
         this.assignee = assignee;
     }
     public boolean isAssigned() {
@@ -50,7 +55,7 @@ public class TodoItemTask {
     }
 
     private int setId() {
-        return ID.getIdNumber();
+        return ID.getInstance().getIdNumber();
     }
 
     @Override
@@ -61,8 +66,8 @@ public class TodoItemTask {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof org.TodoApp.com.TodoItemTask)) return false;
-        org.TodoApp.com.TodoItemTask that = (org.TodoApp.com.TodoItemTask) o;
+        if (!(o instanceof TodoItemTask)) return false;
+        TodoItemTask that = (TodoItemTask) o;
         return id == that.id && assigned == that.assigned && java.util.Objects.equals(todoItem, that.todoItem) && java.util.Objects.equals(assignee, that.assignee);
     }
 

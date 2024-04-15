@@ -1,5 +1,10 @@
-package org.TodoApp.com;
+package org.TodoApp.com.model;
+
 import java.time.LocalDate;
+import org.TodoApp.com.sequencers.ID;
+import org.TodoApp.com.model.Person;
+import java.time.LocalDate;
+
 public class TodoItem {
     private int id;
     private String title;
@@ -9,7 +14,7 @@ public class TodoItem {
     private Person creator;
 
 
-    public TodoItem(String title, String taskDescription, java.time.LocalDate deadLine, org.TodoApp.com.Person creator) {
+    public TodoItem(String title, String taskDescription, LocalDate deadLine, Person creator) {
         setTitle(title);
         setTaskDescription(taskDescription);
         setDeadLine(deadLine);
@@ -26,8 +31,6 @@ public class TodoItem {
         return title;
     }
 
-
-
     public String getTaskDescription() {
         return taskDescription;
     }
@@ -36,12 +39,12 @@ public class TodoItem {
         return deadLine;
     }
 
-    public org.TodoApp.com.Person getCreator() {
+    public Person getCreator() {
         return creator;
     }
 
-
     /********************/
+
     public void setTitle(String title) {
 
         if(title == null || title.trim().isEmpty()) throw new IllegalArgumentException("Title cannot be null or empty");
@@ -57,7 +60,7 @@ public class TodoItem {
         this.done = done;
     }
 
-    public void setCreator(org.TodoApp.com.Person creator) {
+    public void setCreator(org.TodoApp.com.model.Person creator) {
         this.creator = creator;
     }
 
@@ -78,7 +81,8 @@ public class TodoItem {
 
     }
     private int setId() {
-        return ID.getIdNumber();
+
+        return ID.getInstance().getIdNumber();
     }
 
     @Override
@@ -89,8 +93,8 @@ public class TodoItem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof org.TodoApp.com.TodoItem)) return false;
-        org.TodoApp.com.TodoItem todoItem = (org.TodoApp.com.TodoItem) o;
+        if (!(o instanceof org.TodoApp.com.model.TodoItem)) return false;
+        org.TodoApp.com.model.TodoItem todoItem = (org.TodoApp.com.model.TodoItem) o;
         return id == todoItem.id && done == todoItem.done && java.util.Objects.equals(title, todoItem.title) && java.util.Objects.equals(taskDescription, todoItem.taskDescription) && java.util.Objects.equals(deadLine, todoItem.deadLine) && java.util.Objects.equals(creator, todoItem.creator);
     }
 
