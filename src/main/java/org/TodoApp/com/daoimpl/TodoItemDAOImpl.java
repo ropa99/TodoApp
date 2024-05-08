@@ -12,7 +12,7 @@ import org.TodoApp.com.model.TodoItem;
 public class TodoItemDAOImpl implements TodoItemDAO{
 
     private  final List<TodoItem> todoItemList = new ArrayList<>();
-
+    static Connection connection = dbConnection.getDbConnection();
 
 
     @Override
@@ -21,7 +21,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
         String insertNewTodoItem = "INSERT INTO todo_item (title,description,deadline,done,assignee_id) VALUES (?, ?,?,?,?)";
 
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 PreparedStatement preparedStatement = connection.prepareStatement(insertNewTodoItem, PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             connection.setAutoCommit(false);
@@ -62,7 +62,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
 
         try (
 
-                Connection connection = dbConnection.getDbConnection();
+
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM todo_item")
         ) {
@@ -86,7 +86,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
     public TodoItem findById(int id) {
         TodoItem todoItem = null;
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo_item WHERE todo_id = ?")
         ) {
             preparedStatement.setInt(1, id);
@@ -117,7 +117,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
 
         try (
 
-                Connection connection = dbConnection.getDbConnection();
+
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo_item WHERE done = ?")
 
         ) {
@@ -145,7 +145,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
     public Collection<TodoItem> findByAssignee(int id) {
         try (
 
-                Connection connection = dbConnection.getDbConnection();
+
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo_item WHERE assignee_id = ?")
 
         ) {
@@ -173,7 +173,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
     public Collection<TodoItem> findByAssignee(Person person) {
         try (
 
-                Connection connection = dbConnection.getDbConnection();
+
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo_item WHERE assignee_id = ?")
 
         ) {
@@ -201,7 +201,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
     public Collection<TodoItem> findByUnassignedTodoItems() {
         try (
 
-                Connection connection = dbConnection.getDbConnection();
+
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM todo_item WHERE assignee_id = null");
 
@@ -226,7 +226,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
     public TodoItem update(TodoItem todoItem) {
         String updateTodoItem= "UPDATE todo_item SET title = ?, description = ?, deadline = ?,done = ?,assignee_id =? WHERE todo_id = ?";
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement(updateTodoItem)
         ) {
             connection.setAutoCommit(false);
@@ -236,6 +236,7 @@ public class TodoItemDAOImpl implements TodoItemDAO{
             preparedStatement.setDate(3, Date.valueOf(todoItem.getDeadLine()));
             preparedStatement.setBoolean(4,todoItem.getIsDone());
             preparedStatement.setInt(5,todoItem.getAssignee());
+            preparedStatement.setInt(6,todoItem.getId());
 
             int rowsInserted = preparedStatement.executeUpdate();
 
@@ -259,7 +260,6 @@ public class TodoItemDAOImpl implements TodoItemDAO{
 
         String deleteTodoItem = "DELETE FROM todo_item WHERE todo_id = ?";
         try (
-                Connection connection = dbConnection.getDbConnection();
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement(deleteTodoItem)
         ) {
             connection.setAutoCommit(false);

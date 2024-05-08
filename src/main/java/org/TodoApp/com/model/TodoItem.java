@@ -29,6 +29,14 @@ public class TodoItem {
         setDone(isDone);
     }
 
+    //Manipulate the assignee value to Null in the table
+    public TodoItem(String title, String taskDescription, LocalDate deadLine, boolean isDone) {
+        setTitle(title);
+        setTaskDescription(taskDescription);
+        setDeadLine(deadLine);
+        setDone(isDone);
+    }
+
     /*********GET********/
 
     public int getId() {

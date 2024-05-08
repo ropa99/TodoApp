@@ -2,6 +2,7 @@ package org.TodoApp.com.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class dbConnection {
     private static Connection con = null;
@@ -12,12 +13,11 @@ public class dbConnection {
 
         String url = "jdbc:mysql://127.0.0.1:3306/todoit";
         try{
-            con = DriverManager.getConnection(url, userName, userPass);
-        } catch (java.sql.SQLException e) {
+                con = DriverManager.getConnection(url, userName, userPass);
+        } catch (SQLException e) {
             e.printStackTrace();
-            //todo throw a custom exception
+            throw new RuntimeException(e);
         }
-
 
     }
     public static Connection getDbConnection(){

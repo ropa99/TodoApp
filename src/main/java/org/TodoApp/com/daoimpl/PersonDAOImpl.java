@@ -12,7 +12,7 @@ import org.TodoApp.com.model.Person;
 public class PersonDAOImpl implements PersonDAO {
 
     private  final List<Person> personList = new ArrayList<>();
-    private Connection con = getAlternateConnection();
+    static Connection connection = dbConnection.getDbConnection();
 
     //Save to db
     @Override
@@ -20,7 +20,7 @@ public class PersonDAOImpl implements PersonDAO {
         String insertNewPerson = "INSERT INTO person (first_name, last_name) VALUES (?, ?)";
 
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement(insertNewPerson, java.sql.PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             connection.setAutoCommit(false);
@@ -56,7 +56,7 @@ public class PersonDAOImpl implements PersonDAO {
     public Collection<Person> findAll() {
         try (
 
-                Connection connection = dbConnection.getDbConnection();
+
                 java.sql.Statement statement = connection.createStatement();
                 java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM person")
         ) {
@@ -76,7 +76,7 @@ public class PersonDAOImpl implements PersonDAO {
     public Person findById(int id) {
         Person person = null;
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE person_id = ?")
         ) {
             preparedStatement.setInt(1, id);
@@ -105,7 +105,7 @@ public class PersonDAOImpl implements PersonDAO {
     public Collection<Person> findByName(String name) {
 
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE first_name = ? OR last_name = ?")
         ) {
             preparedStatement.setString(1, name);
@@ -132,7 +132,7 @@ public class PersonDAOImpl implements PersonDAO {
     public Person update(Person person) {
         String updatePerson = "UPDATE person SET first_name = ?, last_name = ? WHERE person_id = ?";
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement(updatePerson)
         ) {
             connection.setAutoCommit(false);
@@ -162,7 +162,7 @@ public class PersonDAOImpl implements PersonDAO {
         int rowsDeleted = 0;
         String deletePerson = "DELETE FROM person WHERE person_id = ?";
         try (
-                Connection connection = dbConnection.getDbConnection();
+
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement(deletePerson)
         ) {
             connection.setAutoCommit(false);
@@ -184,9 +184,5 @@ public class PersonDAOImpl implements PersonDAO {
         return isDeleted;
     }
 
-    private Connection getAlternateConnection() {
 
-            return dbConnection.getDbConnection();
-
-    }
 }
