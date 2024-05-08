@@ -18,7 +18,7 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public Person create(Person person) {
         String insertNewPerson = "INSERT INTO person (first_name, last_name) VALUES (?, ?)";
-        //String insertNewPerson = "INSERT INTO person (1,2) VALUES (?, ?)";
+
         try (
                 Connection connection = dbConnection.getDbConnection();
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement(insertNewPerson, java.sql.PreparedStatement.RETURN_GENERATED_KEYS)
