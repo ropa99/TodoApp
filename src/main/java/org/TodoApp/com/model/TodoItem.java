@@ -1,9 +1,6 @@
 package org.TodoApp.com.model;
 
 import java.time.LocalDate;
-import org.TodoApp.com.sequencers.ID;
-import org.TodoApp.com.model.Person;
-import java.time.LocalDate;
 
 public class TodoItem {
     private int id;
@@ -11,17 +8,36 @@ public class TodoItem {
     private String taskDescription;
     private LocalDate deadLine;
     private boolean done;
-    private Person creator;
+    private int assignee;
 
-
-    public TodoItem(String title, String taskDescription, LocalDate deadLine, Person creator) {
+    //Get/update data
+    public TodoItem(int id,String title, String taskDescription, LocalDate deadLine,boolean isDone,int assignee) {
+        setId(id);
         setTitle(title);
         setTaskDescription(taskDescription);
         setDeadLine(deadLine);
-       setCreator(creator);
-        setDone(false);
-        this.id = setId();
+        setDone(isDone);
+        setAssignee(assignee);
     }
+
+    //Insert data
+    public TodoItem(String title, String taskDescription, LocalDate deadLine, boolean isDone,int assignee) {
+        setTitle(title);
+        setTaskDescription(taskDescription);
+        setDeadLine(deadLine);
+        setAssignee(assignee);
+        setDone(isDone);
+    }
+
+    //Manipulate the assignee value to Null in the table
+    public TodoItem(String title, String taskDescription, LocalDate deadLine, boolean isDone) {
+        setTitle(title);
+        setTaskDescription(taskDescription);
+        setDeadLine(deadLine);
+        setDone(isDone);
+    }
+
+    /*********GET********/
 
     public int getId() {
         return id;
@@ -39,11 +55,15 @@ public class TodoItem {
         return deadLine;
     }
 
-    public Person getCreator() {
-        return creator;
+    public int getAssignee() {
+        return assignee;
     }
 
-    /********************/
+    public boolean getIsDone(){
+        return done;
+    }
+
+    /*********SET********/
 
     public void setTitle(String title) {
 
@@ -60,8 +80,8 @@ public class TodoItem {
         this.done = done;
     }
 
-    public void setCreator(org.TodoApp.com.model.Person creator) {
-        this.creator = creator;
+    public void setAssignee(int assignee) {
+        this.assignee = assignee;
     }
 
     public void setTaskDescription(String taskDescription) {
@@ -80,14 +100,14 @@ public class TodoItem {
         }
 
     }
-    private int setId() {
+    public void setId(int id) {
 
-        return ID.getInstance().getIdNumber();
+        this.id = id;
     }
 
     @Override
     public String toString(){
-        return "id: " + getId() + "," + "title: " + getTitle() + ", " + "description: " + getTaskDescription() + ", " + "deadline " + getDeadLine() + ", " + "status: " + isDone() + ", " + "creator: " + getCreator().getFirstName() + " " + getCreator().getLastName();
+        return "id: " + getId() + "," + "title: " + getTitle() + ", " + "description: " + getTaskDescription() + ", " + "deadline " + getDeadLine() + ", " + "status: " + isDone() + ", " + "assignee: " + getAssignee() ;
     }
 
     @Override
@@ -95,11 +115,11 @@ public class TodoItem {
         if (this == o) return true;
         if (!(o instanceof org.TodoApp.com.model.TodoItem)) return false;
         org.TodoApp.com.model.TodoItem todoItem = (org.TodoApp.com.model.TodoItem) o;
-        return id == todoItem.id && done == todoItem.done && java.util.Objects.equals(title, todoItem.title) && java.util.Objects.equals(taskDescription, todoItem.taskDescription) && java.util.Objects.equals(deadLine, todoItem.deadLine) && java.util.Objects.equals(creator, todoItem.creator);
+        return id == todoItem.id && done == todoItem.done && java.util.Objects.equals(title, todoItem.title) && java.util.Objects.equals(taskDescription, todoItem.taskDescription) && java.util.Objects.equals(deadLine, todoItem.deadLine) && java.util.Objects.equals(assignee, todoItem.assignee);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(id, title, taskDescription, deadLine, done, creator);
+        return java.util.Objects.hash(id, title, taskDescription, deadLine, done, assignee);
     }
 }

@@ -1,24 +1,23 @@
 package org.TodoApp.com.model;
-
-import org.TodoApp.com.sequencers.ID;
-
+//refactored to jdbc assignment
 public class Person {
     private int id;
     private String firstName;
     private String lastName;
-    private String email;
-    private AppUser credentials;
 
-    public Person(String firstName, String lastName, String email) {
+    //Get/update data
+    public Person(int id,String firstName, String lastName) {
         setFirstName(firstName);
         setLastName(lastName);
-        setEmail(email);
-        this.id = setId();
+        setId(id);
+
+
     }
 
-    public Person(String firstName, String lastName, String email, org.TodoApp.com.model.AppUser credentials) {
-        this(firstName,lastName,email);
-        setCredentials(credentials);
+    //Insert data
+    public Person(String firstName, String lastName) {
+        setFirstName(firstName);
+        setLastName(lastName);
     }
 
     /******************/
@@ -33,15 +32,6 @@ public class Person {
         return this.lastName;
     }
 
-    public String getEmail(){
-        return this.email;
-    }
-
-
-    public AppUser getCredentials() {
-        return credentials;
-    }
-
     /***************/
 
     public void setFirstName(String firstName){
@@ -53,25 +43,16 @@ public class Person {
         if(lastName == null || lastName.trim().isEmpty()) throw new IllegalArgumentException("Last name cannot be null or empty");
         this.lastName = lastName;
     }
-    public void setEmail(String email){
-        if(email == null || email.trim().isEmpty()) throw new IllegalArgumentException("Email cannot be null or empty");
-        this.email = email;
 
-    }
-    public void setCredentials(AppUser credentials) {
-        if(credentials == null) throw new IllegalArgumentException("Credentials cannot be null");
-        this.credentials = credentials;
-    }
 
-    private int setId() {
-
-        return org.TodoApp.com.sequencers.ID.getInstance().getIdNumber();
+    public void setId(int id) {
+        this.id = id;
 
     }
     /*************/
     @Override
     public String toString(){
-        return "id: " + getId() + "," + " name: " + getFirstName() + " " + getLastName() + ", " + "email: " + getEmail();
+        return "id: " + getId() + "," + " name: " + getFirstName() + " " + getLastName();
     }
 
     @Override
@@ -79,11 +60,11 @@ public class Person {
         if (this == o) return true;
         if (!(o instanceof org.TodoApp.com.model.Person)) return false;
         org.TodoApp.com.model.Person person = (org.TodoApp.com.model.Person) o;
-        return id == person.id && java.util.Objects.equals(firstName, person.firstName) && java.util.Objects.equals(lastName, person.lastName) && java.util.Objects.equals(email, person.email) ;
+        return id == person.id && java.util.Objects.equals(firstName, person.firstName) && java.util.Objects.equals(lastName, person.lastName)  ;
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(id, firstName, lastName, email);
+        return java.util.Objects.hash(id, firstName, lastName);
     }
 }

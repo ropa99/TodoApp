@@ -1,12 +1,14 @@
 package org.TodoApp.com.dao;
-import org.TodoApp.com.model.Person;
+
 import java.util.Collection;
+import org.TodoApp.com.model.Person;
 
 public interface PersonDAO {
 
-    Person persist(Person pUser);
-    Person findById(int id);
-    Person findByEmail(String email);
+    Person create(Person pUser);
     Collection<Person> findAll();
-    void remove(int id);
+    Person findById(int id);
+    Collection<Person> findByName(String name);
+    Person update(Person person);
+    boolean deleteById(int Id);
 }
