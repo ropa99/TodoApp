@@ -5,7 +5,7 @@ public class Person {
     private String firstName;
     private String lastName;
 
-    //Get data
+    //Get/update data
     public Person(int id,String firstName, String lastName) {
         setFirstName(firstName);
         setLastName(lastName);

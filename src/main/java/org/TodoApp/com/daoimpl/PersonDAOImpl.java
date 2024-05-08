@@ -77,7 +77,7 @@ public class PersonDAOImpl implements PersonDAO {
         Person person = null;
         try (
                 Connection connection = dbConnection.getDbConnection();
-                java.sql.PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE id = ?")
+                java.sql.PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE person_id = ?")
         ) {
             preparedStatement.setInt(1, id);
             try (
@@ -88,6 +88,8 @@ public class PersonDAOImpl implements PersonDAO {
                     person = new Person(resultSet.getInt(1),
                             resultSet.getString(2),
                             resultSet.getString(3));
+                }else{
+                    System.out.println("Could not find a person with id: " + id);
                 }
             }
         } catch (SQLException e) {
@@ -104,9 +106,10 @@ public class PersonDAOImpl implements PersonDAO {
 
         try (
                 Connection connection = dbConnection.getDbConnection();
-                java.sql.PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE name = ?")
+                java.sql.PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM person WHERE first_name = ? OR last_name = ?")
         ) {
             preparedStatement.setString(1, name);
+            preparedStatement.setString(2, name);
             try (
                     java.sql.ResultSet resultSet = preparedStatement.executeQuery()
             ) {
@@ -117,7 +120,7 @@ public class PersonDAOImpl implements PersonDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Failed to fetch data for findByName() with name: " + name + " " + e.getMessage());
+            System.out.println("Failed to fetch Person with name: " + name + " " + e.getMessage());
         }
         return personList;
     }
@@ -127,19 +130,19 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public Person update(Person person) {
-        String updatePerson = "UPDATE city SET Name = ?, CountryCode = ?, District = ?, Population = ? WHERE ID = ?";
+        String updatePerson = "UPDATE person SET first_name = ?, last_name = ? WHERE person_id = ?";
         try (
                 Connection connection = dbConnection.getDbConnection();
                 java.sql.PreparedStatement preparedStatement = connection.prepareStatement(updatePerson)
         ) {
             connection.setAutoCommit(false);
-            preparedStatement.setInt(1, person.getId());
-            preparedStatement.setString(2, person.getFirstName());
-            preparedStatement.setString(3, person.getLastName());
+
+            preparedStatement.setString(1, person.getFirstName());
+            preparedStatement.setString(2, person.getLastName());
+            preparedStatement.setInt(3, person.getId());
 
             int rowsInserted = preparedStatement.executeUpdate();
 
-            /* todo: remove */
             if (rowsInserted > 0) {
                 System.out.println("Update operation for person table successfully.");
             } else {
